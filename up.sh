@@ -1,9 +1,4 @@
 #!/bin/bash
-# Grab IP passed to ip-change.sh
-#regex="\[.*]([[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3})"
-#[[ $1 =~ $regex ]]
-#new_ip=${BASH_REMATCH[1]}
-
 # Grab VPN internal IP
 str=$(ip addr | grep tun0)
 regex="inet ([[:digit:]]{0,3}.[[:digit:]]{0,3}.[[:digit:]]{0,3}.[[:digit:]]{0,3})"
@@ -13,7 +8,7 @@ vpn_internal_ip=${BASH_REMATCH[1]}
 echo "Found VPN internal IP [${vpn_internal_ip}]"
 
 # Update transmission config to bind to new address
-# 	"bind-address-ipv4": "0.0.0.0"
+# 	"bind-address-ipv4": "x.x.x.x"
 shutdown_daemon=false
 if systemctl status transmission-daemon &> /dev/null; then
 	shutdown_daemon=true
